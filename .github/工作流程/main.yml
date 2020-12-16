@@ -1,0 +1,89 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflo n push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    步骤：
+      ＃在$ GITHUB_WORKSPACE下签出您的存储库，以便您的工作可以访问它
+      -用途： actions / checkout @ v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+名称：导出配置
+
+在：
+    workflow_dispatch：
+    repository_dispatch：
+        类型：出口
+
+职位：
+    建立：
+        运行：ubuntu-latest
+        如果：github.event.repository.owner.id == github.event.sender.id
+        步骤：
+            -名称：拉取代码
+              用途：actions / checkout @ v2
+            -名称：使用Node.js
+              用途：actions / setup-node @ v1
+              与：
+                  节点版本：“ 12.x ”
+            -名称：安装依赖包
+              运行：|
+                  npm安装
+            -名称：“运行【导出配置】”
+              运行：|
+                  节点export.js
+              env：
+                  JD_COOKIE：$ {{机密。JD_COOKIE || github.event.client_payload.JD_COOKIE}}
+                  JD_DEBUG：$ {{机密。JD_DEBUG || github.event.client_payload.JD_DEBUG}}
+                  PUSH_KEY：$ {{机密。PUSH_KEY || github.event.client_payload.PUSH_KEY}}
+                  BARK_PUSH：$ {{ secrets.BARK_PUSH || github.event.client_payload.BARK_PUSH}}
+                  BARK_SOUND：$ {{ secrets.BARK_SOUND || github.event.client_payload.BARK_SOUND}}
+                  TG_BOT_TOKEN：$ {{机密。TG_BOT_TOKEN || github.event.client_payload.TG_BOT_TOKEN}}
+                  TG_USER_ID：$ {{机密。TG_USER_ID || github.event.client_payload.TG_USER_ID}}
+                  DD_BOT_TOKEN：$ {{机密。DD_BOT_TOKEN || github.event.client_payload.DD_BOT_TOKEN}}
+                  DD_BOT_SECRET：$ {{机密。DD_BOT_SECRET || github.event.client_payload.DD_BOT_SECRET}}
+                  DO_NOT_FORK：$ {{机密。DO_NOT_FORK || github.event.client_payload.DO_NOT_FORK}}
+                  SUPERMARKET_UPGRADE：$ {{机密。SUPERMARKET_UPGRADE|| github.event.client_payload.SUPERMARKET_UPGRADE}}
+                  jdBusinessCircleJump：$ {{ secrets.BUSINESS_CIRCLE_JUMP || github.event.client_payload.BUSINESS_CIRCLE_JUMP}}
+                  SUPERMARKET_SHARECODES：$ {{机密。SUPERMARKET_SHARECODES|| github.event.client_payload.SUPERMARKET_SHARECODES}}
+                  jdSuperMarketLottery：$ {{ secrets.SUPERMARKET_LOTTERY || github.event.client_payload.SUPERMARKET_LOTTERY}}
+                  PET_NOTIFY_CONTROL：$ {{机密。PET_NOTIFY_CONTROL || github.event.client_payload.PET_NOTIFY_CONTROL}}
+                  PETSHARECODES：$ {{ secrets.PETSHARECODES || github.event.client_payload.PETSHARECODES}}
+                  FRUIT_BEAN_CARD：$ {{机密。FRUIT_BEAN_CARD || github.event.client_payload.FRUIT_BEAN_CARD}}
+                  水果代码：$ {{ secrets.FruitShareCodes || github.event.client_payload.FruitShareCodes}}
+                  FRUIT_NOTIFY_CONTROL：$ {{机密。FRUIT_NOTIFY_CONTROL || github.event.client_payload.FRUIT_NOTIFY_CONTROL}}
+                  MARKET_COIN_TO_BEANS：$ {{机密。MARKET_COIN_TO_BEANS || github.event.client_payload.MARKET_COIN_TO_BEANS}}
+                  MARKET_REWARD_NOTIFY：$ {{机密。MARKET_REWARD_NOTIFY || github.event.client_payload.MARKET_REWARD_NOTIFY}}
+                  JD_JOY_REWARD_NOTIFY：$ {{机密。JD_JOY_REWARD_NOTIFY || github.event.client_payload.JD_JOY_REWARD_NOTIFY}}
+                  取消订阅：$ {{secrets.UNSUBSCRIBE || github.event.client_payload.UNSUBSCRIBE}}
+                  XMLY_SPEED_COOKIE：$ {{ secrets.XMLY_SPEED_COOKIE || github.event.client_payload.XMLY_SPEED_COOKIE}}
+                  XMLY_ACCUMULATE_TIME：$ {{ secrets.XMLY_ACCUMULATE_TIME || github.event.client_payload.XMLY_ACCUMULATE_TIME}}
+                  XMLY_ACCUMULATE_INDEX：$ {{ secrets.XMLY_ACCUMULATE_INDEX || github.event.client_payload.XMLY_ACCUMULATE_INDEX}}
+                  XMLY_ACCUMULATE_HOURS：$ {{ secrets.XMLY_ACCUMULATE_HOURS || github.event.client_payload.XMLY_ACCUMULATE_HOURS}}
+                  XMLY_ANDROID_AGENT：$ {{ secrets.XMLY_ANDROID_AGENT || github.event.client_payload.XMLY_ANDROID_AGENT}}
